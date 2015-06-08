@@ -1,5 +1,5 @@
 import urllib
-import hashlib
+#import hashlib
 import time
 import sys
 from PIL import ImageChops
