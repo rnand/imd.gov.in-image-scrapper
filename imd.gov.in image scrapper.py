@@ -2,7 +2,7 @@ import urllib
 #import hashlib
 import time
 import sys
-from PIL import ImageChops
+from PIL import ImageChops #the library that contains useful functions for comparing images
 from PIL import Image
 import os
 
@@ -21,7 +21,7 @@ def retrieve_image():
 	prev_filename=filename+'.jpg'
 
 def compare_images(im1,im2):
-	img1=Image.open(im1)
+	img1=Image.open(im1) #open the images
 	img2=Image.open(im2)
 	return ImageChops.difference(img1, img2).getbbox() is None
 
@@ -37,11 +37,11 @@ elif no_of_images>1:
 	retrieve_image()
 	for i in range(1,no_of_images+1,1):
 		for n in range(time_it_takes,0,-1):
-			sys.stdout.write('Next snap in %d seconds' %n)
+			sys.stdout.write('Next snap in %d seconds' %n)   #print in the same line
 			sys.stdout.flush()
 			time.sleep(1)
 		retrieve_image()
-		duplicate=compare_images(location+filename+'.jpg',location+prev_filename)
+		duplicate=compare_images(location+filename+'.jpg',location+prev_filename) #compare the two images
 		if duplicate:
 		#delete the file and continue to next iteration
 			os.remove(location+prev_filename)
