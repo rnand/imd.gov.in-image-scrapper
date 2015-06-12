@@ -25,7 +25,7 @@ def compare_images(im1,im2):
 	img2=Image.open(im2)
 	return ImageChops.difference(img1, img2).getbbox() is None
 
-time_it_takes=no_of_images*15*60 #check every 15 minutes
+time_it_takes=no_of_images*2*2 #check every 15 minutes 15*60
 
 if no_of_images==0:
 	sys.exit(0)
@@ -36,23 +36,23 @@ elif no_of_images>1:
 
 	retrieve_image()
 	count=1
-	while(True):
-		if count!=no_of_images:
-			for n in range(time_it_takes,0,-1):
-				sys.stdout.write('Next snap in %d seconds' %n)   #print in the same line
-				sys.stdout.flush()
-				time.sleep(1)
-			retrieve_image()
-			duplicate=compare_images(location+filename+'.jpg',location+prev_filename) #compare the two images
-			if duplicate:
-			#delete the file and continue to next iteration
-				os.remove(location+prev_filename)
-				count-=1
-				continue
-			else:
-			#rename the tmp file with timestamp
-				os.rename(location+prev_filename,location+filename+'.jpg')
-				count+=1
+	while(count!=no_of_images):
+		
+		for n in range(time_it_takes,0,-1):
+			sys.stdout.write("\rNext snap in %d seconds" %n)   #print in the same line
+			sys.stdout.flush()
+			time.sleep(1)
+		retrieve_image()
+		duplicate=compare_images(location+filename+'.jpg',location+prev_filename) #compare the two images
+		if duplicate:
+		#delete the file and continue to next iteration
+			os.remove(location+prev_filename)
+			count-=1
+			continue
+		else:
+		#rename the tmp file with timestamp
+			#os.rename(location+prev_filename,location+filename+'.jpg')
+			count+=1
 
 
 print 'done.'
