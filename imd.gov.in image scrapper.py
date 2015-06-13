@@ -13,7 +13,7 @@ location=raw_input('Enter the location to save the images (e.g. C:\img\ ):')
 no_of_images=int(input('How many images do you need?'))
 prev_filename=''
 #filename=''
-#imestamp=''
+
 
 def retrieve_image():
 	print "\nretrieving image.."
