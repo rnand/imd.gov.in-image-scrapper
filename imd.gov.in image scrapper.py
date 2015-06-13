@@ -28,7 +28,7 @@ def retrieve_image():
 def compare_images(im1,im2):
 	img1=Image.open(im1) #open the images
 	img2=Image.open(im2)
-	return ImageChops.difference(img1, img2).getbbox() is None
+	return ImageChops.difference(img1, img2).getbbox() is None #checks whether the two images are the same and returns true if they are, false otherwise
 
 time_it_takes=no_of_images*15*60 #check every 15 minutes (15*60)
 
@@ -39,15 +39,15 @@ elif no_of_images==1:
 elif no_of_images>1:
 	print "This will take some time as the script will check for new images every 15 minutes. Do not close the program." 
 
-	retrieve_image()
-	count=1
+	retrieve_image() #get the first image
+	count=1          #set count as 1 since we got the first image
 	while(count!=no_of_images):
 		
-		for n in range(time_it_takes,0,-1):
+		for n in range(time_it_takes,0,-1):   #this is for the countdown timer
 			sys.stdout.write("\rNext snap in %d seconds" %n)   #print in the same line
 			sys.stdout.flush()
-			time.sleep(1)
-		retrieve_image()
+			time.sleep(1)   #sleep for 1 second
+		retrieve_image()    
 		duplicate=compare_images(location+filename+'.jpg',location+prev_filename) #compare the two images
 		if duplicate:
 		#delete the file and continue to next iteration
