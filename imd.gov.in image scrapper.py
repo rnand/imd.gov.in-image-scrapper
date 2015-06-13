@@ -1,5 +1,4 @@
 import urllib
-#import hashlib
 import time
 import sys
 from PIL import ImageChops #the library that contains useful functions for comparing images
@@ -51,11 +50,9 @@ elif no_of_images>1:
 			os.remove(location+filename+'.jpg')
 			count-=1
 			if count <1:
-				count=1
+				count=1 #reset counter if goes below 1
 			continue
 		else:
-		#rename the tmp file with timestamp
-			#os.rename(location+prev_filename,location+filename+'.jpg')
 			count+=1
 
 
