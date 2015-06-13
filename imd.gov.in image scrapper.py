@@ -18,14 +18,16 @@ def retrieve_image():
 	filename=time.strftime("%Y%m%d-%H%M%S")
 	urllib.urlretrieve('http://www.imd.gov.in/section/satmet/img/sector-ir.jpg',location+filename+'.jpg')
 	global prev_filename
-	prev_filename=filename+'.jpg'
+	if prev_filename=='':
+
+		prev_filename=filename+'.jpg'
 
 def compare_images(im1,im2):
 	img1=Image.open(im1) #open the images
 	img2=Image.open(im2)
 	return ImageChops.difference(img1, img2).getbbox() is None
 
-time_it_takes=no_of_images*2*2 #check every 15 minutes 15*60
+time_it_takes=no_of_images*15*60 #check every 15 minutes (15*60)
 
 if no_of_images==0:
 	sys.exit(0)
@@ -46,8 +48,10 @@ elif no_of_images>1:
 		duplicate=compare_images(location+filename+'.jpg',location+prev_filename) #compare the two images
 		if duplicate:
 		#delete the file and continue to next iteration
-			os.remove(location+prev_filename)
+			os.remove(location+filename+'.jpg')
 			count-=1
+			if count <1:
+				count=1
 			continue
 		else:
 		#rename the tmp file with timestamp
