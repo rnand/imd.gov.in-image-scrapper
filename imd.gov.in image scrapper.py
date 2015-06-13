@@ -1,5 +1,6 @@
 # This script is not for grabbing archieved images in bulk. This script is for periodically retrieving images from IMD as they are published.
 # IMD publishes new image in every 30 minutes. So if you need 2 images, it will atleat take 30 minutes to acquire them.
+# The ability to download archived images in bulk will be added soon.
 import urllib
 import time
 import sys
